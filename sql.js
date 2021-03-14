@@ -89,7 +89,7 @@ Returns a SQL query string that will find the number of female medalists.
 */
 
 const numberWomenMedalists = country => {
-
+  return `SELECT COUNT(DISTINCT name) AS count FROM GoldMedal WHERE country = '${country}' AND gender = 'Women';`
 }
 
 /*
