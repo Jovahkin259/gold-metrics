@@ -1,6 +1,7 @@
 const sqlite3 = require('sqlite3')
 const db = new sqlite3.Database('./gold_medals.sqlite')
 
+// TODO ADD HELPER FUNCTIONS TO DRY CODE!
 /*
 Returns a SQL query string that will create the Country table with four columns: name (required), code (required), gdp, and population.
 */
@@ -106,7 +107,15 @@ optionally ordered by the given field in the specified direction.
 */
 
 const orderedMedals = (country, field, sortAscending) => {
-
+  let orderingString = ''
+  if (field) {
+    if (sortAscending) {
+      orderingString = `ORDER BY ${field} ASC`
+    } else {
+      orderingString = `ORDER BY ${field} DESC`
+    }
+  }
+  return `SELECT * FROM GoldMedal WHERE country = '${country}' ${orderingString};`
 }
 
 /*
